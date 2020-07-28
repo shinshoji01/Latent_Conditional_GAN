@@ -54,6 +54,18 @@ git lfs pull
 
 ---
 ## Citation
+```
+@article{Sho INOUE2020,
+  title={LCGAN: Conditional GAN with Multiple Discrete Classes},
+  author={Sho INOUE and Tad GONSALVES},
+  journal={人工知能学会全国大会論文集},
+  volume={JSAI2020},
+  number={ },
+  pages={2K4ES202-2K4ES202},
+  year={2020},
+  doi={10.11517/pjsai.JSAI2020.0_2K4ES202}
+}
+```
 
 ---
 ## Coming soon
