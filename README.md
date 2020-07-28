@@ -50,6 +50,8 @@ git lfs fetch --all
 git lfs pull
 ```
 
+[Japanese explanation](https://www.slideshare.net/hibiki443/git-git-lfs-60951449)
+
 ---
 ## Citation
 
