@@ -54,6 +54,7 @@ git lfs pull
 
 ---
 ## Citation
+If our work is useful for your research, please consider to cite:
 ```
 @article{Sho INOUE2020,
   title={LCGAN: Conditional GAN with Multiple Discrete Classes},
@@ -71,6 +72,10 @@ git lfs pull
 ## Coming soon
 Some are not explained which include
 - How to download and use CelebA dataset
+
+---
+## Contact
+Feel free to contact me if you have any question(<s-inoue-tgz@eagle.sophia.ac.jp>).
 
 ---
 ## Notice
