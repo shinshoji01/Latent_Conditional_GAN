@@ -16,7 +16,7 @@ I conducted the experimentation with CelebA dataset, which has plenty of annotat
 ## Notebook Structure
 The whole picture of my model is shown below.
 
-![Screen Shot 2020-07-26 at 15 06 34](https://user-images.githubusercontent.com/28431328/88752746-a3672680-d195-11ea-833a-93803ce240fd.png)
+<img width="735" alt="Screen Shot 2020-07-29 at 12 18 32" src="https://user-images.githubusercontent.com/28431328/88753752-035ecc80-d198-11ea-9d31-7537871b8780.png">
 
 This procedure is divided into **3 notebooks** and they are colored separately. I'm gonna show the results and concise explanations, please visit the notebooks for the detail and the implementation.
 
