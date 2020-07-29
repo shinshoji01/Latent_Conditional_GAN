@@ -78,6 +78,7 @@ Some are not explained which include:
 - the structures of VAE and LCGAN.
 - How to start plotly.
 - pip requirements.
+- explanations of some functions.
 
 ---
 ## Contact
