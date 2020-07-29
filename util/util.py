@@ -9,7 +9,9 @@ import glob
 import pickle
 import torch.utils.data
 import torchvision.transforms as transforms
+import shutil
 import copy
+from mpl_toolkits.mplot3d import Axes3D
 from PIL import Image
 import warnings
 import itertools
@@ -66,3 +68,88 @@ def weights_init(m):
     elif classname.find('batchnorm') != -1:     # バッチノーマライゼーションの場合
         m.weight.data.normal_(0.0, 0.02)
         m.bias.data.fill_(0)
+        
+def label_standardization(data, mean=0, scale=1):
+    m = np.mean(data, axis=0)
+    s = np.std(data, axis=0)
+    new_data = (data - m) / s
+    new_data = (new_data + mean) * scale / np.sqrt(data.shape[1])
+    return new_data
+        
+        
+def save_gif(data_list, gif_path, relational_label, moving_label, route, save_dir = "contempolary_images/", fig_size=(15.5, 9.2), font_title=24, duration=100, classes=tuple(range(8))):
+    shutil.rmtree(save_dir, ignore_errors=True)
+    os.makedirs(save_dir, exist_ok=True)
+    each = len(data_list) // len(classes)
+    for i in range(len(data_list)):
+        fig = plt.figure(figsize=fig_size)
+        plt.cla()
+        ax = fig.add_subplot(1,2,1)
+        ax.imshow(data_list[i])
+        if i >= each * (len(classes)-1):
+            ax.set_title(f"({label_discription[route[-1]]}) \n → ({label_discription[route[0]]})", fontsize=20)
+        else:
+            ax.set_title(f"({label_discription[route[i//each]]}) \n → ({label_discription[route[i//each+1]]})", fontsize=20)
+
+        ax = fig.add_subplot(1,2,2, projection="3d")
+        for lbl in classes:
+            m = relational_label[lbl]
+            x_ = m[0:1] 
+            y_ = m[1:2]
+            z_ = m[2:]
+            ax.scatter3D(x_, y_, z_, label=f"{lbl}", s=150)
+        a = moving_label[i:i+1,:]
+        ax.set_title("relation label \n and current label", fontsize=16)
+        ax.scatter3D(a[:,0:1], a[:,1:2], a[:,2:3], label=f"current label", s=100)
+        ax.view_init(elev=30., azim=210)
+        ax.legend()
+
+        save_path = save_dir + f"{str(i).zfill(3)}"
+        plt.tick_params(labelbottom=False, labelleft=False, labelright=False, labeltop=False)
+        plt.savefig(save_path, dpi = 64, facecolor = "lightgray", tight_layout=True)
+        plt.close()
+        
+    files = sorted(glob.glob(save_dir + '*.png'))
+    images = list(map(lambda file: Image.open(file), files))
+    images[0].save(gif_path, save_all=True, append_images=images[1:], duration=duration, loop=0)
+    
+    
+def get_moving_label(label, classes, delta=0.1):
+    points = []
+    for j in range(len(classes)-1):
+        for i in range(int(1/delta)+1):
+            alpha = delta * i
+            point = (1-alpha)*label[classes[j]] + alpha*label[classes[j+1]]
+            points.append(point)
+    for i in range(int(1/delta)+1):
+        alpha = delta * i
+        point = (1-alpha)*label[classes[-1]] + alpha*label[classes[0]]
+        points.append(point)
+    points = np.array(points)
+    return points
+
+def get_moving_path(target_label, delta=0.1, route=np.array([])):
+    if len(route)==0:
+        route = two_opt(target_label, 0)
+    moving_label = get_moving_label(target_label, route, delta)
+    return moving_label, route
+
+############### https://codeday.me/jp/qa/20190604/929507.html #######################################
+path_distance = lambda r,c: np.sum([np.linalg.norm(c[r[p]]-c[r[p-1]]) for p in range(len(r))])
+two_opt_swap = lambda r,i,k: np.concatenate((r[0:i],r[k:-len(r)+i-1:-1],r[k+1:len(r)]))
+
+def two_opt(cities,improvement_threshold): # 2-opt Algorithm adapted from https://en.wikipedia.org/wiki/2-opt
+    route = np.arange(cities.shape[0]) # Make an array of row numbers corresponding to cities.
+    improvement_factor = 1 # Initialize the improvement factor.
+    best_distance = path_distance(route,cities) # Calculate the distance of the initial path.
+    while improvement_factor > improvement_threshold: # If the route is still improving, keep going!
+        distance_to_beat = best_distance # Record the distance at the beginning of the loop.
+        for swap_first in range(1,len(route)-2): # From each city except the first and last,
+            for swap_last in range(swap_first+1,len(route)): # to each of the cities following,
+                new_route = two_opt_swap(route,swap_first,swap_last) # try reversing the order of these cities
+                new_distance = path_distance(new_route,cities) # and check the total distance with this modification.
+                if new_distance < best_distance: # If the path distance is an improvement,
+                    route = new_route # make this the accepted best route
+                    best_distance = new_distance # and update the distance corresponding to this route.
+        improvement_factor = 1 - best_distance/distance_to_beat # Calculate how much the route has improved.
+    return route # When the route is no longer improving substantially, stop searching and return the route.
