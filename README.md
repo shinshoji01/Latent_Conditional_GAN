@@ -16,24 +16,27 @@ I conducted the experimentation with CelebA dataset, which has plenty of annotat
 ## Notebook Structure
 The whole picture of my model is shown below.
 
-<img width="743" alt="Screen Shot 2020-07-28 at 0 37 02" src="https://user-images.githubusercontent.com/28431328/88561521-7c600600-d06a-11ea-9126-c434364f06eb.png">
+![Screen Shot 2020-07-26 at 15 06 34](https://user-images.githubusercontent.com/28431328/88752746-a3672680-d195-11ea-833a-93803ce240fd.png)
 
 This procedure is divided into **3 notebooks** and they are colored separately. I'm gonna show the results and concise explanations, please visit the notebooks for the detail and the implementation.
 
 #### VAE
 The reconstructed images are shown below, where the upper images represent the input image and the others are reconstructed by the model. The reconstructed image seems to be distinguishable among the classes.
 
-image_VAE
+![image](https://user-images.githubusercontent.com/28431328/88752826-c98cc680-d195-11ea-92a9-bf8280d2503b.png)
 
 #### Dimension Reduction
+As I said, a relational label is the label which is processed by the latent code of VAE. In this experiment, dimension of the latent code was 128 and it's reduced to 3 by the means of dimension reduction. Please visit the notebook to follow the detail. A gif and static image of the relational label is shown below.
 
-image_DR
-gif_DR
+![relational_label_gif_for_git](https://user-images.githubusercontent.com/28431328/88752687-83376780-d195-11ea-85d1-286b517335f3.gif)
+![Screen Shot 2020-07-29 at 12 23 24](https://user-images.githubusercontent.com/28431328/88753084-59327500-d196-11ea-9eb6-4767779c1c60.png)
 
 #### LCGAN
+This is the final experiment for LCGAN. I employed the relational label as a label instead of the one-hot vector. The motivation of using this label is representation of continuous label. So that I've changed the label gradually and observed the output as shown below. 
 
-image_LCGAN
-gif_LCGAN
+![transition_LCGAN](https://user-images.githubusercontent.com/28431328/88752669-761a7880-d195-11ea-9765-0eaaa5fc0829.gif)
+![image](https://user-images.githubusercontent.com/28431328/88753114-6a7b8180-d196-11ea-9599-dd4d76747161.png)
+
 
 ---
 ## Git LFS (large file storage)
