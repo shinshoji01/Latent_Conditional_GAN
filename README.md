@@ -73,8 +73,10 @@ If our work is useful for your research, please consider to cite:
 
 ---
 ## Coming soon
-Some are not explained which include
-- How to download and use CelebA dataset
+Some are not explained which include:
+- How to download and use CelebA dataset as I used.
+- How to start plotly.
+- pip requirements.
 
 ---
 ## Contact
