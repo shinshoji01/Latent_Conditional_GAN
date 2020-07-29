@@ -10,7 +10,6 @@ import pickle
 import torch.utils.data
 import torchvision.transforms as transforms
 import copy
-import lightgbm as lgb
 from PIL import Image
 import warnings
 import itertools
@@ -121,14 +120,6 @@ class VAE(nn.Module):
         return sum(lower_bound)
     
     
-class GAP(nn.Module):
-    def __init__(self):
-        super(GAP, self).__init__()
-
-    def forward(self, x):
-        return x.mean(dim=(2,3), keepdim=True)
-    
-    
 class Discriminator(nn.Module):
     
     def __init__(self, nch_input, nch_output, nch=64, n_layers=4):
@@ -147,7 +138,6 @@ class Discriminator(nn.Module):
             layers.append(nn.LeakyReLU(negative_slope=0.2))
             in_nch = out_nch
             
-        layers.append(GAP())
         layers.append(nn.Conv2d(out_nch, nch_output, kernel_size=1, stride=1, padding=0))
         layers.append(nn.Sigmoid())
         
