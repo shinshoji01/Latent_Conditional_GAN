@@ -93,10 +93,7 @@ If our work is useful for your research, please consider to cite:
 ---
 ## Coming soon
 Some are not explained which include:
-- How to download and use CelebA dataset as I used.
 - the structures of VAE and LCGAN.
-- How to start plotly.
-- pip requirements.
 - explanations of some functions.
 
 ---
