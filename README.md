@@ -39,7 +39,9 @@ This is the final experiment for LCGAN. I employed the relational label as a lab
 
 
 ---
-## Git LFS (large file storage)
+## Installation of some apps
+The basic pip requirements are noted in `data/requrements.txt`. In addition to it,  please install some apps mentioned below to try my notebooks. 
+#### Git LFS (large file storage)
 Since this repository contains the parameters of VAE and LCGAN. I used Git LFS to store a large file. The codes below are the recipe for this.
 
 ```bash
@@ -51,6 +53,23 @@ brew install git-lfs
 git lfs install
 git lfs fetch --all
 git lfs pull
+```
+
+#### Plotly
+This is the application of interactive visualization I've used. In order to operate it properly, you need to add a expansion to your own jupyterlab.
+
+```bash
+pip install plotly
+jupyter labextension install @jupyterlab/plotly-extension
+```
+
+#### Light GBM
+You're not able to install LightGBM concisely as well, please run the code below.
+
+```bash
+brew install libomp
+pip install lightgbm
+pip list --format=columns | grep -i lightgbm
 ```
 
 [Japanese explanation](https://www.slideshare.net/hibiki443/git-git-lfs-60951449)
