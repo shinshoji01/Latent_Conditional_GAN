@@ -13,6 +13,7 @@ import shutil
 import copy
 from mpl_toolkits.mplot3d import Axes3D
 from PIL import Image
+import pickle
 import warnings
 import itertools
 warnings.filterwarnings("ignore")
@@ -29,6 +30,11 @@ def pickle_load(path):
     with open(path, mode='rb') as f:
         data = pickle.load(f)
     return data
+
+
+def pickle_save(obj, path):
+    with open(path, mode='wb') as f:
+        pickle.dump(obj, f)
 
 
 def min_max(x, axis=None, mean0=False, get_param=False):
