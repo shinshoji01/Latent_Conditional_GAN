@@ -42,7 +42,7 @@ This is the final experiment for LCGAN. I employed the relational label as a lab
 ## Installation of some apps
 The basic pip requirements are noted in `data/requrements.txt`. In addition to it,  please install some apps mentioned below to try my notebooks. 
 #### Git LFS (large file storage)
-Since this repository contains the parameters of VAE and LCGAN. I used Git LFS to store a large file. The codes below are the recipe for this.
+Since this repository contains the parameters of VAE and LCGAN. I used Git LFS to store a large file. The codes below are the recipe for macOS. For the others, please visit [this](https://github.com/git-lfs/git-lfs/wiki/Installation).
 
 ```bash
 brew update
