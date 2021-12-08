@@ -8,7 +8,7 @@ This paper introduces Latent Conditional GAN. This is Conditional GAN whose labe
 - Reduction of the label dimension
 - Inclusion of the class relevance
 - Representing the continuous label by discrete classes
-- *not depending on the structure of GANs and VAEs
+- *not* depending on the structure of GANs and VAEs
 
 I conducted the experimentation with CelebA dataset, which has plenty of annotations. As a result, this model could generate data that changes continuously in regard to the given class vector with a lower dimension.
 
