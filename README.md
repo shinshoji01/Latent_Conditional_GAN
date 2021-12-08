@@ -40,7 +40,6 @@ This is the final experiment for LCGAN. I employed the relational label as a lab
 
 ---
 ## Installation of some apps
-The basic pip requirements are noted in `data/requrements.txt`. In addition to it,  please install some apps mentioned below to try my notebooks. 
 #### Git LFS (large file storage)
 Since this repository contains the parameters of VAE and LCGAN. I used Git LFS to store a large file. The codes below are the recipe for macOS. For the others, please visit [this](https://github.com/git-lfs/git-lfs/wiki/Installation).
 
@@ -55,24 +54,15 @@ git lfs fetch --all
 git lfs pull
 ```
 
-#### Plotly
-This is the application of interactive visualization I've used. In order to operate it properly, you need to add a expansion to your own jupyterlab.
+---
 
-```bash
-pip install plotly
-jupyter labextension install @jupyterlab/plotly-extension
-```
+## Docker Environment
+This repository contains docker environment to allow anyone to try my model. To make the execution simple, I created my environment with docker-compose. Please follow the procedure below to build my environment.
 
-#### Light GBM
-You're not able to install LightGBM concisely as well, please run the code below.
-
-```bash
-brew install libomp
-pip install lightgbm
-pip list --format=columns | grep -i lightgbm
-```
-
-[Japanese explanation](https://www.slideshare.net/hibiki443/git-git-lfs-60951449)
+1. Go to `Docker/`
+2. `docker-compose up -d`
+3. `docker-compose exec lcgan nohup jupyter lab --ip=0.0.0.0 --no-browser --allow-root --NotebookApp.token='' --port 8085`
+4. Go to http://localhost:8085/lab
 
 ---
 ## Citation
