@@ -32,10 +32,9 @@ RUN ipython profile create default && \
 	    echo "c.Completer.use_jedi = False" >> /opt/.ipython/profile_default/ipython_config.py
 
 # jupyterlab extension
-RUN jupyter labextension install jupyterlab_vim && \
-	    # plotly
-	    pip install plotly==4.14.3 && \
-	    jupyter labextension install @jupyterlab/plotly-extension && \
+# plotly
+RUN pip install plotly==4.14.3 && \
+        jupyter labextension install @jupyterlab/plotly-extension && \
 	    # ipywidget
 	    pip install ipywidgets && \
 	    jupyter nbextension enable --py --sys-prefix widgetsnbextension && \
