@@ -11,5 +11,5 @@ lightgbm==2.3.1
 plotly==4.5.2
 jupyter-client==6.0.0
 jupyter-core==4.6.3
-jupyterlab==1.2.6
+jupyterlab==1.2.21
 jupyterlab-server==1.0.6
